@@ -1,25 +1,21 @@
 const readline = require("readline");
-// use the node core "readline" to interact directly 
-// with the terminal
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
 
-let tasks = [];
+const tasks = [];
 
 function welcomeScreen(){
-
-    console.log("\n Welcome to Todo CLI! \n" +
-    "--------------------");
+    console.log("\n Welcome to Todo CLI! \n --------------------");
     mainScreen();
 }
 
 function mainScreen(){
 
     rl.question(
-        "(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n >", 
+        "\n (v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n >", 
         function (answer){
         if (answer === "v"){
             showTasks();
@@ -34,11 +30,11 @@ function mainScreen(){
             deleteTask(answer);
         }
         else if (answer === "q"){
-            console.log("you answered q");
+            console.log("See you soon! 😄 ");
             rl.close();
         }
         else{
-            console.log("Sorry I did not understand your input. Please try again.")
+            console.log("\n Sorry I did not understand. Please try again.")
             mainScreen();
         }
     })
@@ -46,7 +42,7 @@ function mainScreen(){
 
 function addTask(){
     rl.question(
-        "What? \n >",
+        "\n What? \n >",
         function (answer){
             tasks.push({ task : answer , status:  "[   ]"});
             mainScreen();
@@ -55,39 +51,36 @@ function addTask(){
 }
 
 function showTasks(){
-
     if(tasks.length > 0){
+        console.log(" ");
         tasks.forEach(element => {
             console.log(`${tasks.indexOf(element)} ${element.status} ${element.task}` );
         });
     }
     else{
-        console.log("no tasks at the moment");
+        console.log("\n List is empty...");
     }
     mainScreen();
 }
 
 function deleteTask(answer){
-
     if(tasks.length > 0){
     taskNo = parseInt(answer.charAt(1));
-    console.log(`Deleted task: ${tasks[taskNo].task}`)
+    console.log(`Deleted: ${tasks[taskNo].task}`)
     tasks.splice(taskNo, 1);
     }
     else{
-        console.log("No tasks to delete");
+        console.log("\n No tasks to delete");
     }
-    
     mainScreen();
 }
 
 function completeTask(answer){
     taskNo = parseInt(answer.charAt(1));
     tasks[taskNo].status = "[ ✓ ]";
-    console.log(`Completed task: ${tasks[taskNo].task}`);
+    console.log(`\n Completed: ${tasks[taskNo].task}`);
     mainScreen();
 }
 
-//start it out
 welcomeScreen();
 
