@@ -109,8 +109,8 @@ router.get('/:id/edit', (req, res) => {
 	knex('cohorts')
 		.where('id', req.params.id)
 		.first()
-		.then(post => {
-			res.render('posts/edit', { post: post });
+		.then(team => {
+			res.render('posts/edit', { team: team });
 		});
 });
 
