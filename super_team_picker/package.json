@@ -1,0 +1,35 @@
+{
+	"name": "express-basics",
+	"version": "0.0.1",
+	"description": "This is a server built using Express",
+	"main": "app.js",
+	"scripts": {
+		"sayHello": "echo \"Hello\"",
+		"start": "nodemon app.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"db:create": "createdb --echo knex_db",
+		"db:drop": "dropdb --if-exists --echo knex_db",
+		"db:migrate": "knex migrate:latest",
+		"db:reset": "npm run db:drop && npm run db:create && npm run db:migrate"
+	},
+	"keywords": [
+		"Express",
+		"Http",
+		"Server"
+	],
+	"author": "Max Gordon",
+	"license": "ISC",
+	"dependencies": {
+		"cookie-parser": "^1.4.3",
+		"ejs": "^2.6.1",
+		"express": "^4.16.4",
+		"knex": "^0.16.3",
+		"method-override": "^3.0.0",
+		"morgan": "^1.9.1",
+		"pg": "^7.8.0"
+	},
+	"devDependencies": {
+		"faker": "^4.1.0",
+		"nodemon": "^1.18.9"
+	}
+}
