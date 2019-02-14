@@ -2,22 +2,37 @@
 <div class="card mb-4">
     <div class="card-body">
         <h1 class="card-title"><%= post.name %></h1>  
-        <p class="card-text"> Members: 
-            <%= post.members %> <br>
-            <em>Posted at <%= new Date(post.createdAt).toLocaleString() %></em>
+        <p class="card-text"> Members: <%= post.members %> </p>
+        
+        <hr>
+
+        <form method="POST" action="./team">
+        <p>Method</p>
+        <p>
+        <input type="radio" name="option" value="team"> Team Count</input><br>
+        <input type="radio" name="option" value="people"> Number per Team</input><br>
+        <input type="hidden" name="id" value="<%=post.id %>"> Number per Team</input><br>
         </p>
+        <p> Quantity: <br><input type="text" name="quantity" size="35"></p>
+        
+        <input type="submit" value="Submit">
+        </form>
+        <br>
+        
         <div class="d-flex">
-            <a 
-                class="btn btn-outline-success mr-2"
-                href="/posts/<%= post.id %>/edit"
-            >
-                Edit
-            </a>
+            <a class="btn btn-outline-success mr-2" href="/posts/<%= post.id %>/edit"> Edit </a>
         </div>
+
         <form method="POST" action="/posts/<%= post.id %>">
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" class="btn btn-outline-danger" value="Delete">
         </form>
+
     </div>
 </div>
+
+
+
+
+
 <%- include("../partials/footer") %>

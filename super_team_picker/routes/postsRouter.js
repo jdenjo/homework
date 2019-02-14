@@ -58,34 +58,11 @@ router.get('/', (req, res) => {
 
 // NAME: posts#show, METHOD: GET, PATH: /posts/:id
 router.get('/:id', (req, res) => {
-	// In the URL above, all the words prefixed with  `:`
-	// are called URL params. You can view the values of URL params
-	// with the `req.params` object property. It contains an object
-	// where the property name corresponds to the name of the url param
-	// and its associated value.
-
-	// `req.params` is an object with key value pairs created by
-	// pattern-matching against "variables" named in the URL/path
-	// route /posts/:id/:name/:job the route then accessed was: /posts/100/Bob/developer
-	// req.params === { id: "100", name: "Bob", job: "developer" }
 	const id = req.params.id;
-	console.log(id);
-	
 	knex('cohorts')
 		.where('id', id)
-		.first()
-		// first is a Knex method that works with SELECT queries
-		// It will return the first result from the array of results
-		// that matched the where clause
-		// Without `first` the result returned from the query will always be an
-		// array of values, even if we know that it is returning only a single value
-		
+		.first()		
 		.then(post => {
-
-			console.log(post)
-			// res.send(post);
-			// If there is a post with that id, we will show it, otherwise
-			// we will redirect the user to the list of all posts
 			if (post) {
 				res.render('posts/show', { post: post });
 			} else {
@@ -93,6 +70,25 @@ router.get('/:id', (req, res) => {
 			}
 		});
 });
+
+router.post('/team', (req, res) => {
+	const formData = req.body;
+	console.log(formData);
+
+	knex('cohorts')
+		.where('id', formData.id)
+		.first()		
+		.then(post => {
+			if (post) {
+				console.log(`got here: ${formData}`)
+				res.render('posts/showTeams', { post: post , formData: formData });
+			} else {
+				res.redirect('/posts');
+			}
+		});
+});
+
+
 
 // NAME: posts#destroy, METHOD: DELETE, PATH: /posts/:id
 router.delete('/:id', (req, res) => {
