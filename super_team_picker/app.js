@@ -31,7 +31,7 @@ app.use((request, response, next) => {
 });
 
 const cohortsRouter = require('./routes/cohortRouter');
-app.use('/posts', cohortsRouter);
+app.use('/cohorts', cohortsRouter);
 
 const baseRouter = require('./routes/baseRouter');
 app.use('/', baseRouter);

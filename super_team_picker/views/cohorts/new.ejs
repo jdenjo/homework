@@ -1,6 +1,10 @@
 <%- include('../partials/header') %>
-<form method="POST" action="/posts">
-    Team Name
+
+<div class="card mb-4">
+    <div class="card-body">
+
+<form method="POST" action="/cohorts">
+    <p>Name </p>
     <div class="form-group">
         <input 
             type="test"
@@ -10,7 +14,7 @@
         >
     </div>
     <div class="form-group">
-    Logo URL
+    <p>Logo URL</p>
         <input 
             type="url" 
             name="imageUrl" 
@@ -18,12 +22,14 @@
         >
     </div>
     <div class="form-group">
-    Members
+    <p>Members </p>
         <textarea 
             class="form-control"
             name="content" 
         ></textarea>
     </div>
-    <input type="submit" class="btn btn-outline-success" value="Submit">
+    <input type="submit" class="btn btn-outline-secondary" value="Submit">
 </form>
+</div>
+</div>
 <%- include('../partials/footer') %>

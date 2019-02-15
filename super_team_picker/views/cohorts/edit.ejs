@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 <h1>Edit Cohort</h1>
-<form method="POST" action="/posts/<%= team.id %>">
+<form method="POST" action="/cohorts/<%= team.id %>">
     <input type="hidden" name="_method" value="PATCH">
     <div class="form-group">
     Team Name
@@ -28,6 +28,6 @@
             placeholder="What are your thoughts?"
         ><%= team.members %></textarea>
     </div>
-    <input type="submit" class="btn btn-outline-success" value="Submit">
+    <input type="submit" class="btn btn-outline-secondary" value="Submit">
 </form>
 <%- include('../partials/footer') %>
