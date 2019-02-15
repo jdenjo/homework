@@ -5,8 +5,8 @@ exports.up = function(knex, Promise) {
 	    return knex.schema.createTable('cohorts', table => {
 	        // CREATE TABLE "posts"
 	        table.increments('id'); // create an autoincrementing column named `id` - "id" SERIAL
-	        table.string('logourl'); // "title" VARCHAR(255)
-	        table.string('members'); // "content" TEXT
+	        table.text('logourl'); // "title" VARCHAR(255)
+	        table.text('members'); // "content" TEXT
 	        table.string('name'); // "viewCount" INTEGER
 	        table.timestamp('createdAt').defaultTo(knex.fn.now());
 	        // "createdAt" timestamp default to NOW()

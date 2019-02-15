@@ -118,7 +118,7 @@ app.use('/', baseRouter);
 // ------------
 // RUN SERVER
 // ------------
-const PORT = 4545;
+const PORT = 5000;
 const HOST = 'localhost'; // 127.0.0.1
 app.listen(PORT, HOST, () => {
 	console.log(`Server is listening at http://${HOST}:${PORT}`);

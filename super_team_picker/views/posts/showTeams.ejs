@@ -9,11 +9,23 @@
         <form method="POST" action="./team">
         <p>Method</p>
         <p>
-        <input type="radio" name="option" value="team"> Team Count</input><br>
-        <input type="radio" name="option" value="people"> Number per Team</input><br>
-        <input type="hidden" name="id" value="<%=post.id %>"> Number per Team</input><br>
+        <input  type="radio" 
+                name="option" 
+                value="team" 
+                <% if (formData.option == "team"){ %> checked="checked" <% } %> 
+                > Team Count
+        </input><br>
+        
+        <input  type="radio" 
+                name="option" 
+                value="people"
+                <% if (formData.option == "people"){ %> checked="checked" <% } %> 
+                > Number per Team
+        </input><br>
+        
+        <input type="hidden" name="id" value="<%=post.id %>">
         </p>
-        <p> Quantity: <br><input type="text" name="quantity" size="35"></p>
+        <p> Quantity: <br><input type="text" name="quantity" size="35" value="<%=formData.quantity%>"></p>
         
         <input type="submit" value="Submit">
         </form>
@@ -38,6 +50,7 @@
                 else{
                     membersPerTeam = formData.quantity;
                 }
+                
                 if (teamCount === 0){
                 numOfTeams = totalPeople / membersPerTeam
                 }
@@ -71,19 +84,16 @@
         } %>
 
 
-        <div class="d-flex">
-            <a class="btn btn-outline-success mr-2" href="/posts/<%= post.id %>/edit"> Edit </a>
-        </div>
+        <a class="btn btn-outline-secondary mr-2" href="/posts/<%= post.id %>/edit"> Edit </a>
+        
 
         <form method="POST" action="/posts/<%= post.id %>">
             <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" class="btn btn-outline-danger" value="Delete">
+            <input type="submit" class="btn btn-outline-secondary" value="Delete">
         </form>
 
     </div>
 </div>
-
-
 
 
 
