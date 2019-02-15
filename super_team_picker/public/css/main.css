@@ -1,0 +1,14 @@
+.welcome-image {
+	border-radius: 10px;
+	max-height: 300px;
+}
+
+.mainBody{
+	margin: auto;
+	width: 40%;
+	padding: 10px;
+}
+
+.welcomeScreen{
+	text-align: center;
+}

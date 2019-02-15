@@ -1,0 +1,51 @@
+<%- include("../partials/header") %>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h1 class="card-title"><%= post.name %></h1>  
+        <p class="card-text"> <%= post.members %> </p>        
+
+        <form method="POST" action="/cohorts/<%= post.id %>">
+            <a class="btn btn-outline-secondary mr-2" href="/cohorts/<%= post.id %>/edit"> Edit </a>    
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" class="btn btn-outline-secondary" value="Delete">            
+        </form>
+
+        <hr>
+        <form method="GET" action="./<%=post.id%>">
+        <p>Method</p>
+        <p>
+        <input  type="radio" 
+                name="option" 
+                value="team" 
+                <% if (formData.option == "team"){ %> checked="checked" <% } %> 
+                > Team Count
+        </input><br>
+        
+        <input  type="radio" 
+                name="option" 
+                value="people"
+                <% if (formData.option == "people"){ %> checked="checked" <% } %> 
+                > Number per Team
+        </input><br>
+        
+        <input type="hidden" name="id" value="<%=post.id %>">
+        <input type="hidden" name="members" value="<%=post.members %>">
+        </p>
+        <p> Quantity: <br><input type="text" name="quantity" size="25" value="<%=formData.quantity%>"></p>
+        
+        <input type="submit" value="Assign Teams" class="btn btn-outline-secondary">
+        </form>
+        <br>
+
+        <% if(formData.option && formData.quantity){
+        for (let i = 0; i < teams.length; i++){%> 
+                <p> <%=  `Team ${i+1}: ` + teams[i].join().trim() %> <hr> </p>
+         <% }} %>
+
+    </div>
+</div>
+
+
+
+<%- include("../partials/footer") %>
