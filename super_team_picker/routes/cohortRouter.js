@@ -3,17 +3,8 @@ const knex = require('../db/client'); // This allows us to interact with the dat
 
 const router = express.Router();
 
-// This postsRouter does not mean that all routes using the HTTP VERB: POST
-// need to be within this router
-// The name of this router comes from the table name within our database called
-// "posts".
-
-// this route is automatically prepended with "/posts"
-// meaning that it is the path: "/posts/new", NOT just "/new"
-// NAME: posts#new, METHOD: GET, PATH: '/posts/new'
+//route for new cohort input
 router.get('/new', (req, res) => {
-	// This will render the new.ejs file located within the posts
-	// directory of the views directory
 	res.render('posts/new');
 });
 
@@ -28,24 +19,12 @@ router.post('/', (req, res) => {
 		})
 		.returning('*')
 		.then(teams => {
-			// This is called "destructuring" the array
-			const [post /*, post2 */] = teams;
-			// const post = posts[0];
-			// const post2 = posts[1];
-
-			// If we want to use a terminating method like
-			// res.send, res.render, or res.redirect
-			// And we want to do this after inserting something,
-			// updating something, reading something, etc from our db
-			// We need to use that terminating method
-			// within the callback to `.then`
-			
+			const [post /*, post2 */] = teams;			
 			res.redirect(`/posts/${teams[0].id}`);
-			// res.redirect('/');
 		});
 });
 
-// NAME: posts#index, METHOD: GET, PATH: /posts
+
 router.get('/', (req, res) => {
 	// knex.select('*').from('posts').then(...) <- this works too, or we can just use the line below
 	knex('cohorts')
@@ -58,20 +37,22 @@ router.get('/', (req, res) => {
 
 // NAME: posts#show, METHOD: GET, PATH: /posts/:id
 router.get('/:id', (req, res) => {
+	// const formData = req.body;
 	const id = req.params.id;
+	const formData = req.query;
 	knex('cohorts')
 		.where('id', id)
 		.first()		
 		.then(post => {
 			if (post) {
-				res.render('posts/show', { post: post });
+				res.render('posts/show', { post: post, formData: formData });
 			} else {
 				res.redirect('/posts');
 			}
 		});
 });
 
-router.post('/team', (req, res) => {
+router.post('/:id', (req, res) => {
 	const formData = req.body;
 	console.log(formData);
 
@@ -81,7 +62,7 @@ router.post('/team', (req, res) => {
 		.then(post => {
 			if (post) {
 				console.log(`got here: ${formData}`)
-				res.render('posts/showTeams', { post: post , formData: formData });
+				res.render('posts/show', { post: post , formData: formData });
 			} else {
 				res.redirect('/posts');
 			}

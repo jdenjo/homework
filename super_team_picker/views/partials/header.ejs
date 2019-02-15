@@ -16,9 +16,8 @@
     </head>
     <body>
         <header>
- 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Team Picker </a>
+        <a class="navbar-brand" href="/">Super Team Picker </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,18 +34,6 @@
               <a class="nav-link" href="/posts/new">New Cohorts</a>
             </li>
           </ul>
-          <% if (loggedInUserName) { %>
-          <span class="navbar-text mr-2">You are signed in as <%= loggedInUserName %></span>
-          <form class="form-inline my-2 my-lg-0" action="/sign_out" method="POST">
-            <button class="btn btn-outline-dark">Sign Out</button>
-          </form>
-          <% } else { %>
-          <form class="form-inline my-2 my-lg-0" action="/sign_in" method="POST" >
-          <input class="form-control mr-2" type="text" name="username" placeholder="Username...">
-          <button class="btn btn-outline-dark" type="submit">Sign In</button>
-          </form>
-          <% } %>
-
 
         </div>
       </nav>
