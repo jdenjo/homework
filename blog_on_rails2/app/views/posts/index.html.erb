@@ -1,0 +1,20 @@
+<div class="container-fluid index-box">
+  <div class="row">
+  <% @posts.each do |post| %>
+  <div class="card-deck col-lg-4 col-md-6 col-sm-12">
+  
+  <div class="card">
+  <div class="card-body">
+     <p><%= link_to post.title, post_path(post.id)  %> </p>
+     <p><%= post.body %> </p>
+
+     <small>
+         Submitted by <%= post.user&.full_name || 'DELETED' %>
+       Created <%= time_ago_in_words(post.created_at) %> ago
+     </small>
+  </div>
+ </div>
+ </div>
+  <% end %>
+  </div>
+</div>
