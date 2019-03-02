@@ -12,17 +12,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    #this passes the post to show
     @post = Post.find(params[:id])
-    #this creates a new object for the comment form
     @comment = Comment.new
-    #this lists out the current comments (if any)
     @comments = @post.comments.order(created_at: :desc)
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    flash[:success] = "Post deleted successfully"
     redirect_to posts_path
   end
 
@@ -34,9 +32,7 @@ class PostsController < ApplicationController
     @post = Post.new params.require(:post).permit(:title, :body)
     @post.user = current_user
     if @post.save
-      # redirect_to method is used to tell the browser
-      # to make a new request.
-      # It is typically used with a named route helper.
+      flash[:success] = "Post created successfully"
       redirect_to post_path(@post.id)
     else
       render :new
@@ -46,8 +42,10 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update params.require(:post).permit(:title, :body)
+      flash[:success] = "Post updated successfully"
       redirect_to post_path(@post.id)
     else
+      flash[:danger] = "Post not updated"
       render :edit
     end
   end

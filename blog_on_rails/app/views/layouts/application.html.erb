@@ -41,21 +41,20 @@
 
      </nav>
 
-      <% flash.each do |type, message| %>
-        <div class="flash flash-<%= type %>">
-         <%= message %>
-       </div>
-     <% end %>
 
      
   </body>
     </header>
 
 
-
     <div class="card-body">
     <div class="card mb-4"" style="padding: 15px">
 
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type %>">
+         <%= message %>
+       </div>
+     <% end %>
     <%= yield %>
 
     </div>

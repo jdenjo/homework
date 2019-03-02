@@ -9,8 +9,10 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @comment.user = current_user
     if @comment.save
+      flash[:success] = "comment created successfully"
       redirect_to post_url(@post.id)
     else
+      flash[:success] = "comment not created"
       @comments = @post.comments.order(created_at: :desc)
       render "posts/show"
     end
@@ -18,13 +20,17 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find params[:id]
-    @comment.destroy
-    redirect_to post_url(@comment.post)
+    if @comment.destroy
+      flash[:success] = "comment deleted successfully"
+      redirect_to post_url(@comment.post)
+    else
+      flash[:danger] = "comment deleted unsuccessful"
+      redirect_to post_url(@comment.post)
+    end
   end
 
   private
 
-  #this is a private method that takes the form inputs
   def post_params
     params.require(:comment).permit(:body)
   end

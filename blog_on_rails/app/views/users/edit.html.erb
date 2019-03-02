@@ -9,21 +9,22 @@
    </p>
  <% end %>
 
- <div>
+  <div class="form-group">
    <%= f.label :first_name %>
-   <%= f.text_field :first_name %>
+   <%= f.text_field :first_name, class: "form-control" %>
  </div>
- <div>
+  <div class="form-group">
    <%= f.label :last_name %>
-   <%= f.text_field :last_name %>
+   <%= f.text_field :last_name, class: "form-control" %>
  </div>
- <div>
+  <div class="form-group">
    <%= f.label :email %>
-   <%= f.email_field :email %>
+   <%= f.email_field :email, class: "form-control" %>
  </div>
 
  <%= f.submit "Update" , class: "btn btn-md btn-outline-primary" %>
 <% end %>
 
+<br>
 <a href="/users/<%= @user.id %>/password"> Change password </a>
 
