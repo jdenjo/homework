@@ -1,0 +1,85 @@
+<h1><%= @post.title %></h1>
+
+<p><%= @post.body %></p>
+
+<p>
+  <small>
+    Posted by <%= @post.user&.full_name || 'DELETED' %>
+    <%= time_ago_in_words(@post.created_at) %> ago
+  </small>
+</p>
+
+<div>
+  <% if can?(:update, @post) %>
+      <%= link_to "Edit", 
+      edit_post_path(@post.id), 
+      class: "btn btn-sm btn-outline-primary" %>
+  <% end  %>
+  
+  <% if can?(:destroy, @post) %>
+
+      <%= link_to "Delete", 
+        post_path(@post.id), 
+        method: :delete, data: { confirm: "Are you sure?" }, 
+        class: "btn btn-sm btn-outline-primary" %>
+
+  <% end %>
+</div>
+
+<section>
+<br>
+  <h4>Comments</h4>
+
+  <%= form_with(model: [@post, @comment], local: true) do |f| %>
+    <% if @comment.errors.present? %>
+      <p class="form-errors">
+        <%= @comment.errors.full_messages.join(", ") %>
+      </p>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.text_area(
+        :body,
+        cols: 50,
+        rows: 3,
+        placeholder: "Whats on your mind?",
+        class: "form-control"
+      ) %>
+    </div>
+    <%= f.submit "Comment", 
+    class: "btn btn-sm btn-outline-primary" %>
+  <% end %>
+  
+  <br>
+
+
+    <% @comments.each do |comment| %>
+
+        <p>
+          <%= comment.body %> <br>
+
+        <small>
+           Commented by <%= comment.user&.full_name || 'DELETED' %>
+            <%= time_ago_in_words(comment.created_at) %> ago
+
+
+                      <% if can?(:update, comment) %>
+        |
+            <%=
+              link_to(
+                "Delete",
+                post_comment_path(@post, comment),
+                method: :delete,
+                data: {
+                  confirm: "Are you sure?"
+                }
+              )
+            %>
+
+          <% end %>
+                  </small>
+        </p>
+
+    <% end %>
+
+</section>

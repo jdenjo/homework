@@ -1,0 +1,30 @@
+
+<h1>Edit User Details</h1>
+
+<%= form_with model: @user, local: true do |f| %>
+
+ <% if @user.errors.any? %>
+   <p>
+     <%= @user.errors.full_messages.join(", ")  %>
+   </p>
+ <% end %>
+
+  <div class="form-group">
+   <%= f.label :first_name %>
+   <%= f.text_field :first_name, class: "form-control" %>
+ </div>
+  <div class="form-group">
+   <%= f.label :last_name %>
+   <%= f.text_field :last_name, class: "form-control" %>
+ </div>
+  <div class="form-group">
+   <%= f.label :email %>
+   <%= f.email_field :email, class: "form-control" %>
+ </div>
+
+ <%= f.submit "Update" , class: "btn btn-md btn-outline-primary" %>
+<% end %>
+
+<br>
+<a href="/users/<%= @user.id %>/password"> Change password </a>
+
