@@ -1,0 +1,35 @@
+.letters{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+
+}
+
+li {
+    font-size: 20px;
+    padding: 10px;
+    border: 2px solid gray;
+    color: grey;
+    border-radius: 5px;
+    margin: 10px;
+    width: 15px;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+.gallows{
+    text-align: center;
+}
+
+.bar_area{
+    text-align: center;
+}
+.bar{
+    display: inline-block;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 40px;
+    text-decoration: underline;
+}
